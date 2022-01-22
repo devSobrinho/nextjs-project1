@@ -1,6 +1,8 @@
 import P from 'prop-types';
 import Head from 'next/head';
 
+import { theme } from '../../styles/theme';
+
 import * as Styled from './styles';
 
 import { Heading } from '../../components/Heading';
@@ -22,6 +24,12 @@ function Home({ data }) {
         <title>
           {title} | {config.siteName}
         </title>
+
+        <meta name="theme-color" content={theme.colors.primaryColor} />
+        <meta
+          name="description"
+          content="Landing pages de exemplo para utilizações futuras"
+        />
       </Head>
       <Base
         links={links}
