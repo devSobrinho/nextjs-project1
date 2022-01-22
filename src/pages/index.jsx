@@ -12,7 +12,7 @@ export default function Index({ data = null }) {
   return <Home data={data} />;
 }
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   let data = null;
   try {
     data = await loadPages('landing-page');

@@ -11,23 +11,23 @@ Page.propTypes = {
   data: P.array,
 };
 
-export const getStaticPaths = async () => {
-  const paths = (await loadPages()).map((page) => {
-    return {
-      params: {
-        slug: page.slug,
-      },
-    };
-  });
+// getStaticPaths é usando apenas quando usa getStaticProps [para mostrar os caminhos], ja q seria uma page static
+// export const getStaticPaths = async () => {
+//   const paths = (await loadPages()).map((page) => {
+//     return {
+//       params: {
+//         slug: page.slug,
+//       },
+//     };
+//   });
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
 
-export const getStaticProps = async (context) => {
-  console.log(context);
+export const getServerSideProps = async (context) => {
   let data = null;
   try {
     data = await loadPages(context.params?.slug);
