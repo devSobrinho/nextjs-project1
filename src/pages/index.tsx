@@ -1,18 +1,16 @@
-import P from 'prop-types';
-
-import styled from 'styled-components';
+import { GetStaticProps } from 'next';
 import { loadPages } from '../api/load-pages';
 import Home from '../templates/Home';
 
-const Heading = styled.h1`
-  background: ${({ theme }) => theme.colors.secondaryColor};
-`;
+export type IndexProps = {
+  data: [];
+};
 
-export default function Index({ data = null }) {
+export default function Index({ data = null }: IndexProps) {
   return <Home data={data} />;
 }
 
-export const getServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   let data = null;
   try {
     data = await loadPages('landing-page');
@@ -29,8 +27,4 @@ export const getServerSideProps = async (context) => {
       data,
     }, // will be passed to the page component as props
   };
-};
-
-Index.propTypes = {
-  data: P.array,
 };

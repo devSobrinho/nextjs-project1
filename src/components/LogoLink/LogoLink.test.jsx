@@ -30,4 +30,16 @@ describe('<LogoLink />', () => {
     );
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  it('should render internal link', () => {
+    renderTheme(<LogoLink link="/link" text="Olá mundo" srcImg="image.jpg" />);
+    renderTheme(<LogoLink link="/link" text="so texto" />);
+    expect(screen.getByAltText('Olá mundo')).toHaveAttribute(
+      'src',
+      'image.jpg',
+    );
+    expect(
+      screen.getByRole('heading', { name: 'so texto' }),
+    ).toBeInTheDocument();
+  });
 });
