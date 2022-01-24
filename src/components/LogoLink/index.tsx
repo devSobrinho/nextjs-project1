@@ -3,7 +3,13 @@ import * as Styled from './styles';
 import { Heading } from '../Heading';
 import Link from 'next/link';
 
-export const LogoLink = ({ text, srcImg = '', link }) => {
+export type LogoLinkProps = {
+  text: string;
+  srcImg?: string;
+  link: string;
+};
+
+export const LogoLink = ({ text, srcImg = '', link }: LogoLinkProps) => {
   const nextLink = link.match(/^\//) ? true : false;
 
   if (nextLink) {
@@ -27,10 +33,4 @@ export const LogoLink = ({ text, srcImg = '', link }) => {
       </Styled.Container>
     </Heading>
   );
-};
-
-LogoLink.propTypes = {
-  text: P.string.isRequired,
-  srcImg: P.string,
-  link: P.string.isRequired,
 };
