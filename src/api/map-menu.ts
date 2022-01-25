@@ -1,0 +1,52 @@
+import { MenuLinkProps } from '../components/MenuLink';
+import { PageData } from '../templates/Home';
+
+type MenuOptionsProps = {
+  open_in_new_tab?: false;
+  link_text?: string;
+  url?: string;
+};
+
+type MenuApiProps = {
+  open_in_new_tab?: boolean;
+  logo_text?: string;
+  logo_link?: string;
+  menu?: MenuOptionsProps[];
+  srcImg?: string;
+  logo?: { url: string };
+};
+
+export const mapMenu = (menu = {} as MenuApiProps): PageData['menu'] => {
+  const {
+    open_in_new_tab: newTab = false,
+    logo_text: text = '',
+    logo_link: link = '',
+    menu: links = [],
+  } = menu;
+
+  const srcImg = menu.logo && menu.logo.url ? menu.logo.url : '';
+
+  return {
+    newTab,
+    text,
+    link,
+    srcImg,
+    links: mapMenuLinks(links),
+  };
+};
+
+export const mapMenuLinks = (links = [] as any[]): MenuLinkProps[] => {
+  return links.map((item: any): MenuLinkProps => {
+    const {
+      open_in_new_tab: newTab = false,
+      link_text: children = '',
+      url: link = '',
+    } = item;
+
+    return {
+      newTab,
+      children,
+      link,
+    };
+  });
+};
