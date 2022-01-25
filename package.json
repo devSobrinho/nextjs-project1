@@ -7,11 +7,19 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src --max-warnings=0",
     "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook",
     "test": "jest",
-    "deploy-static": "npm run build && npm run export"
+    "deploy-static": "npm run build && npm run export",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*": [
+      "npm run lint -- --fix",
+      "npm test -- --findRelatedTests --bail"
+    ]
   },
   "dependencies": {
     "@styled-icons/material-outlined": "^10.34.0",
@@ -41,8 +49,10 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^5.1.2",
     "jest": "^27.3.1",
     "jest-styled-components": "^7.0.5",
+    "lint-staged": "^12.3.1",
     "prettier": "^2.2.1",
     "typescript": "^4.5.5"
   }

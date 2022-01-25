@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MenuLinkProps } from '../components/MenuLink';
 import { PageData } from '../templates/Home';
 
