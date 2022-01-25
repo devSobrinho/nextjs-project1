@@ -1,11 +1,15 @@
-import P from 'prop-types';
 import { useRouter } from 'next/router';
 
 import { loadPages } from '../api/load-pages';
 import { Loading } from '../templates/Loading';
-import Home from '../templates/Home';
+import Home, { HomeProps } from '../templates/Home';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-export default function Page({ data }) {
+export type PageProps = {
+  data: [];
+};
+
+export default function Page({ data }: PageProps) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -14,12 +18,8 @@ export default function Page({ data }) {
   return <Home data={data} />;
 }
 
-Page.propTypes = {
-  data: P.array,
-};
-
 // getStaticPaths é usando apenas quando usa getStaticProps [para mostrar os caminhos], ja q seria uma page static
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   // const paths = (await loadPages()).map((page) => {
   //   return {
   //     params: {
@@ -34,10 +34,10 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async (context) => {
   let data = null;
   try {
-    data = await loadPages(context.params?.slug);
+    data = await loadPages(context.params?.slug as string);
   } catch (e) {
     //
   }

@@ -22,7 +22,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "types/jest-styled-components.d.ts"
+    "types/jest-styled-components.d.ts",
+    "src/styles/render-theme.js"
   ],
   "exclude": [
     "node_modules"

@@ -34,12 +34,21 @@ describe('<LogoLink />', () => {
   it('should render internal link', () => {
     renderTheme(<LogoLink link="/link" text="Olá mundo" srcImg="image.jpg" />);
     renderTheme(<LogoLink link="/link" text="so texto" />);
+
     expect(screen.getByAltText('Olá mundo')).toHaveAttribute(
       'src',
       'image.jpg',
     );
     expect(
       screen.getByRole('heading', { name: 'so texto' }),
+    ).toBeInTheDocument();
+  });
+
+  it('should render a link target _black', () => {
+    renderTheme(<LogoLink link="/link" text="outro text" newTab={true} />);
+
+    expect(
+      screen.getByRole('heading', { name: 'outro text' }),
     ).toBeInTheDocument();
   });
 });
